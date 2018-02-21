@@ -1,6 +1,7 @@
 package com.udacity.sandwichclub.model;
 
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
 import java.util.List;
 
@@ -49,14 +50,14 @@ public class Sandwich {
         if (this.alsoKnownAs.isEmpty()) {
             return "";
         }
-
-        StringBuilder builder = new StringBuilder();
-        builder.append(alsoKnownAs.get(0));
-        for (int i = 1; i < alsoKnownAs.size() - 1; i++) {
-            builder.append(", ");
-            builder.append(alsoKnownAs.get(i));
-        }
-        return builder.toString();
+        return TextUtils.join(", ", this.alsoKnownAs);
+//        StringBuilder builder = new StringBuilder();
+//        builder.append(alsoKnownAs.get(0));
+//        for (int i = 1; i < alsoKnownAs.size() - 1; i++) {
+//            builder.append(", ");
+//            builder.append(alsoKnownAs.get(i));
+//        }
+//        return builder.toString();
     }
 
     public String getPlaceOfOrigin() {
@@ -97,12 +98,14 @@ public class Sandwich {
             return "";
         }
 
-        StringBuilder builder = new StringBuilder();
-        builder.append(ingredients.get(0));
-        for (int i = 1; i < ingredients.size() - 1; i++) {
-            builder.append(", ");
-            builder.append(ingredients.get(i));
-        }
-        return builder.toString();
+        return TextUtils.join(", ", this.ingredients);
+
+//        StringBuilder builder = new StringBuilder();
+//        builder.append(ingredients.get(0));
+//        for (int i = 1; i < ingredients.size() - 1; i++) {
+//            builder.append(", ");
+//            builder.append(ingredients.get(i));
+//        }
+//        return builder.toString();
     }
 }

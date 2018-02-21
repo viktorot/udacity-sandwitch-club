@@ -17,17 +17,25 @@ public class JsonUtils {
 
     public static String TAG = "JsonUtils";
 
+    private static String PROP_NAME = "name";
+    private static String PROP_MAIN_NAME = "mainName";
+    private static String PROP_AKA = "alsoKnownAs";
+    private static String PROP_ORIGIN = "placeOfOrigin";
+    private static String PROP_DESC = "description";
+    private static String PROP_IMAGE = "image";
+    private static String PROP_ING = "ingredients";
+
     public static Sandwich parseSandwichJson(String json) {
         try {
             JSONObject object = new JSONObject(json);
-            JSONObject nameObj = object.getJSONObject("name");
+            JSONObject nameObj = object.getJSONObject(PROP_NAME);
 
-            String name = nameObj.getString("mainName");
-            List<String> altNames = getList(nameObj.getJSONArray("alsoKnownAs"));
-            String birth = object.getString("placeOfOrigin");
-            String desc = object.getString("description");
-            String img = object.getString("image");
-            List<String> ingredients = getList(object.getJSONArray("ingredients"));
+            String name = nameObj.optString(PROP_MAIN_NAME);
+            List<String> altNames = getList(nameObj.optJSONArray(PROP_AKA));
+            String birth = object.optString(PROP_ORIGIN);
+            String desc = object.optString(PROP_DESC);
+            String img = object.optString(PROP_IMAGE);
+            List<String> ingredients = getList(object.optJSONArray(PROP_ING));
             return new Sandwich(name, altNames, birth, desc, img, ingredients);
         } catch (JSONException e) {
             Log.e(TAG, "error parsing sandwich JSON", e);
